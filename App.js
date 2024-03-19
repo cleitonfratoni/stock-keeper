@@ -1,20 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { Text, View, Button, Alert } from 'react-native';
+import { css } from './assets/css/Css';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {Login, Rastreio} from './views'
+
 
 export default function App() {
+
+  const Stack = createNativeStackNavigator();
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen 
+        name="Home" 
+        component={Login} 
+        // Option serve para configurar Header
+        options={{
+          title: '',
+          headerStyle:{backgroundColor: '#000'},
+          headerTintColor: '#333',
+          headerTitleStyle:{fontSize:0, fontWeight:'bold', alignSelf:'center', color:'#fff'},
+        }}
+        />
+        <Stack.Screen name="Rastreio" component={Rastreio} />
+        {/* <Stack.Screen name="AreaRestrita" component={AreaRestrita} /> */}
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
