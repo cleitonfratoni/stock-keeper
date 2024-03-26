@@ -16,7 +16,7 @@ export default function Login({navigation}){
 
 
     return(
-        <View style={css.container_fundo}>
+        <View style={css.container_top}>
             <View style={css.container_textinput}>
                 <Image style={css.img_logo} source={require('../assets/img/SK_mini.png')}/>
                 <Text style={css.textPage_login}>Username</Text>
