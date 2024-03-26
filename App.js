@@ -16,7 +16,7 @@ export default function App() {
         <Stack.Screen 
         name="Login" 
         component={Login} 
-        // Option serve para configurar Header
+        // Option serve para configurar Header.
         options={{
           title: '',
           headerStyle:{backgroundColor: '#000'},
