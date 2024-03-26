@@ -1,20 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import React from 'react';
+import { Platform, View, Text } from 'react-native';
+import { HomeAndroid, Login, ScanQRCode } from './views/index';
 
-export default function App() {
+const Stack = createNativeStackNavigator();
+
+function SeparatingScreen() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      {Platform.OS === 'android' ? (
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{
+              title: '',
+              headerStyle: { backgroundColor: '#000' },
+              headerTintColor: '#333',
+              headerTitleStyle: {
+                fontSize: 0,
+                fontWeight: 'bold',
+                alignSelf: 'center',
+                color: '#fff',
+              },
+            }}
+          />
+          <Stack.Screen name="Home" component={HomeAndroid} />
+          <Stack.Screen name="ScanQRCode" component={ScanQRCode} />
+        </Stack.Navigator>
+      ) : (
+        <Text>Este é o layout para Web</Text>
+      )}
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default SeparatingScreen;
