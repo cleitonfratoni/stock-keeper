@@ -3,7 +3,7 @@ import { Text, View, Button, Alert } from 'react-native';
 import { css } from './assets/css/Css';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {Login, Rastreio} from './views'
+import {Home, Login, Rastreio} from './views'
 
 
 export default function App() {
@@ -14,7 +14,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen 
-        name="Home" 
+        name="Login" 
         component={Login} 
         // Option serve para configurar Header
         options={{
@@ -24,7 +24,11 @@ export default function App() {
           headerTitleStyle:{fontSize:0, fontWeight:'bold', alignSelf:'center', color:'#fff'},
         }}
         />
-        <Stack.Screen name="Rastreio" component={Rastreio} />
+        <Stack.Screen 
+        name="Home" 
+        component={Home}
+        
+        />
         {/* <Stack.Screen name="AreaRestrita" component={AreaRestrita} /> */}
       </Stack.Navigator>
     </NavigationContainer>

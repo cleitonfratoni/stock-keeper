@@ -12,15 +12,14 @@ const css = StyleSheet.create({
     },
 
     img_logo:{
-      height: 100,
-      width: 120,
+      height: 150,
+      width: 130,
       marginLeft: 100,
       marginBottom: 30,
     },
 
     container_textinput:{
       padding: 20,
-      // margin: 30,
     },
 
     textPage_login:{
@@ -40,11 +39,6 @@ const css = StyleSheet.create({
         borderRadius: 12,
     },
 
-    // container_button:{
-    //   height: 35,
-    //   width:325,
-    //   color: '#000',
-    // },
     container_fundo_2:{
       backgroundColor: '#000',
       alignItems: 'center',
@@ -54,11 +48,11 @@ const css = StyleSheet.create({
     container_button_2:{
       backgroundColor: '#fff',
       borderRadius: 30,
-      paddingVertical: 10,
+      paddingVertical: 20,
       paddingHorizontal: 40,
       marginVertical: 8,
       width: 320,
-      height:40,
+      height:60,
     },
     text_button:{
       color: '#000',

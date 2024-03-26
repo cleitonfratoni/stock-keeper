@@ -1,5 +1,5 @@
-import Home from './Home';
 import Login from './Login';
+import Home from './Home';
 import Rastreio from './Rastreio';
 
-export {Home, Login, Rastreio};
+export {Login, Home, Rastreio};
