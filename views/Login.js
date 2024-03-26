@@ -34,16 +34,11 @@ export default function Login({navigation}){
                     secureTextEntry={true}
                     onChangeText={(text) => setPassword(text)}
                 />
-                {/* <Text onPress={()=> navigation.navigate('Home',{id:31})} style={css.text_esqueceu_senha}>Esqueceu a Senha?</Text> */}
             </View>
-            <View style={css.container_fundo_2}>
-                <TouchableOpacity style={css.container_button_2} onPress={handleLogin}>
+            <View style={css.container_button}>
+                <TouchableOpacity style={css.button_enter} onPress={handleLogin}>
                     <Text style={css.text_button}>Entrar</Text>
                 </TouchableOpacity>
-
-                {/* <TouchableOpacity style={css.container_button_2} onPress={()=> navigation.navigate('Home',{id:31})}>
-                    <Text style={css.text_button}>Cadastre-se</Text>
-                </TouchableOpacity> */}
                 <View style={css.container_footer}>
                 </View>
             </View>
