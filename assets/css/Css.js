@@ -6,9 +6,15 @@ const css = StyleSheet.create({
       alignItems: 'center',
     },//
 
+    container_safeArea:{
+      backgroundColor: '#000',
+      alignItems: 'center',
+    },//
+
     img_logo:{
-      height: 150,
+      height: 130,
       width: 130,
+      marginTop:-30,
       marginLeft: 100,
       marginBottom: 30,
     },//
