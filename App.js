@@ -3,7 +3,7 @@ import { Text, View, Button, Alert } from 'react-native';
 import { css } from './assets/css/Css';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {Home, Login, Rastreio} from './views'
+import {HomeAndroid, Login, ScanQRCode} from './views'
 
 
 export default function App() {
@@ -26,10 +26,12 @@ export default function App() {
         />
         <Stack.Screen 
         name="Home" 
-        component={Home}
-        
+        component={HomeAndroid}
+        options={{
+          headerShown:false
+        }}
         />
-        {/* <Stack.Screen name="AreaRestrita" component={AreaRestrita} /> */}
+        <Stack.Screen name="ScanQRCode" component={ScanQRCode} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,5 +1,5 @@
-import Login from './Login';
-import Home from './Home';
-import Rastreio from './Rastreio';
+import Login from './android/Login';
+import HomeAndroid from './android/HomeAndroid';
+import ScanQRCode from './android/ScanQRCode'
 
-export {Login, Home, Rastreio};
+export {Login, HomeAndroid, ScanQRCode};
