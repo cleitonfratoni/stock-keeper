@@ -5,18 +5,7 @@ import { css } from '../../assets/css/Css';
 export default function ScanQRCode(props) {
     return(
         <SafeAreaView style={css.container_tela_padrao}>
-            <View>
-                <Image style={css.img_logo_gray} source={require('../../assets/img/logo_gray.jpeg')}/>
-            </View>
-            <View>    
-                <TouchableOpacity onPress={() => props.navigation.navigate('Inventario')} style={css.buttonP}>
-                    <View style={css.container_button}>
-                        <Image style={css.img_button} source={require('../../assets/img/QRCodeIcon.png')} />
-                        <Text style={css.text_button}>Inventário</Text>
-                    </View>
-                </TouchableOpacity>
-            </View>
-            
+            <Text>Teste ScanQRCode</Text>
         </SafeAreaView>
     );
 }

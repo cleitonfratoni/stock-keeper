@@ -9,7 +9,11 @@ const Stack = createNativeStackNavigator();
 function SeparatingScreen() {
   return (
     <NavigationContainer>
-      {Platform.OS === 'android' ? (
+      {Platform.OS === 'web' ? (
+        <View>
+          <Text>Este é o layout para Web</Text>
+        </View>
+      ) : (
         <Stack.Navigator>
           <Stack.Screen
             name="Login"
@@ -18,6 +22,7 @@ function SeparatingScreen() {
               title: '',
               headerStyle: { backgroundColor: '#000' },
               headerTintColor: '#333',
+              headerShown: false,
               headerTitleStyle: {
                 fontSize: 0,
                 fontWeight: 'bold',
@@ -26,11 +31,15 @@ function SeparatingScreen() {
               },
             }}
           />
-          <Stack.Screen name="Home" component={HomeAndroid} />
-          <Stack.Screen name="ScanQRCode" component={ScanQRCode} />
+          <Stack.Screen name="Home" 
+          component={HomeAndroid}
+          options={{headerShown:false}}
+          />
+          <Stack.Screen name="ScanQRCode"
+          component={ScanQRCode}
+          options={{headerShown:false}}
+          />
         </Stack.Navigator>
-      ) : (
-        <Text>Este é o layout para Web</Text>
       )}
     </NavigationContainer>
   );
