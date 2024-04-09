@@ -14,7 +14,6 @@ export default function Login({navigation}){
         }
     }
 
-
     return(
         <View style={css.container_login}>
             <View style={css.container_textinput}>
