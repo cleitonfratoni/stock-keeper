@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "database_development",
+    "username": "cleitonr",
+    "password": "Senha@123",
+    "database": "stock-keeper",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
