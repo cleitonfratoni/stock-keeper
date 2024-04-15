@@ -4,6 +4,7 @@ import { css } from './assets/css/Css';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {HomeAndroid, Login, ScanQRCode} from './views'
+import AsyncStorage from '@react-native-community/async-storage';
 
 
 export default function App() {
