@@ -4,12 +4,15 @@ import { css } from './assets/css/Css';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {HomeAndroid, Login, ScanQRCode} from './views'
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import AreaRestrita from './views/arearestrita/AreaRestrita';
 
 
 export default function App() {
 
   const Stack = createNativeStackNavigator();
+
+  
 
   return (
     <NavigationContainer>
@@ -26,13 +29,15 @@ export default function App() {
         }}
         />
         <Stack.Screen 
-        name="Home" 
+        name="HomeAndroid" 
         component={HomeAndroid}
         options={{
-          headerShown:false
+          headerShown:false,
+          gestureEnabled: false
         }}
         />
         <Stack.Screen name="ScanQRCode" component={ScanQRCode} />
+        <Stack.Screen name="AreaRestrita" component={AreaRestrita} />
       </Stack.Navigator>
     </NavigationContainer>
   );

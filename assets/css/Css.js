@@ -90,5 +90,20 @@ const css = StyleSheet.create({
         alignItems: 'center',
         padding: 110,
       },
+
+      //Header da HomeAndroid pra colocar botão de logout (temporario?)
+      HomeAndroid_title:{
+        flexDirection: 'row',
+        width: '100%',
+        backgroundColor: '#2B2B2B',
+        justifyContent:'flex-end'
+      },
+
+      //Botão da header HomeAndroid de Logout
+      buttom_logout:{
+        textAlign:'right',
+        marginRight: 10,
+        marginTop: 60,
+      },
   });
 export{css};

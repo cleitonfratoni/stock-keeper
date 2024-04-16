@@ -17,7 +17,7 @@ let stock=models.stock;
 app.post('/login',async(req,res)=>{
     let response=await user.findOne({
         where:{
-            name:req.body.username,
+            username:req.body.username,
             password:req.body.password
         }
     });
@@ -29,6 +29,12 @@ app.post('/login',async(req,res)=>{
     }
 });
 
+let port=process.env.PORT || 3000;
+app.listen(port, (req,res)=>{
+    console.log('Servidor Rodando');
+});
+
+// //   PRA NÃO ESQUECER
 // // Insert do Usuário
 // app.get('/create',async (req,res)=>{
 //     let create=await user.create({
@@ -68,8 +74,3 @@ app.post('/login',async(req,res)=>{
 //         }
 //     })
 // });
-
-let port=process.env.PORT || 8082;
-app.listen(port, (req,res)=>{
-    console.log('Servidor Rodando');
-});
