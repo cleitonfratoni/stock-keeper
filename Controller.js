@@ -27,9 +27,17 @@ app.get('/read', async (req,res)=>{
 
 app.get('/update', async (req,res)=>{
     let update=await user.findByPk(4).then((response)=>{
-        console.log(response);
+        response.name='fubokinha';
+        response.password='abc123';
+        response.save();
     })
 });
+
+app.get('/delete', async (req,res)=>{
+    user.destroy({
+        where: {id:4}
+    })
+})
 
 
 app.get('/',(req,res)=>{
