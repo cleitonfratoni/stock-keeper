@@ -58,7 +58,7 @@ const css = StyleSheet.create({
         borderRadius: 30,
         paddingVertical: 20,
         paddingHorizontal: 40,
-        marginVertical: 60,
+        marginVertical: 20,
         width: 320,
         height:60,
     },
@@ -104,6 +104,15 @@ const css = StyleSheet.create({
         textAlign:'right',
         marginRight: 10,
         marginTop: 60,
+      },
+
+      //Text principal para telas (Identificador de telas)
+      identify_label:{
+        textAlign:'center',
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 25,
+        marginBottom: 15,
       },
   });
 export{css};

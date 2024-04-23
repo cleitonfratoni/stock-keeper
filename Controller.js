@@ -3,6 +3,7 @@ const cors=require('cors');
 const bodyParser=require('body-parser');
 const { Model } = require('sequelize');
 const models=require('./models');
+const QRCode = require('qrcode');
 
 const app=express();
 app.use(cors());
@@ -33,6 +34,25 @@ let port=process.env.PORT || 3000;
 app.listen(port, (req,res)=>{
     console.log('Servidor Rodando');
 });
+
+// INSERT
+app.post('/create', async(req, res)=>{
+    let productId='';
+    // Criando produto no banco
+    await product.create({
+        name: req.body.product,
+        code: req.body.code,
+        product_type: req.body.type,
+        description: req.body.description,
+        price: req.body.price
+    }).then((response)=>{
+        productId+=response.id;
+    });
+});
+
+
+
+
 
 // //   PRA NÃO ESQUECER
 // // Insert do Usuário

@@ -75,10 +75,16 @@ export default function HomeAndroid({navigation}) {
                 <Image style={css.img_logo_gray} source={require('../../assets/img/logo_gray.jpeg')}/>
             </View>
             <View>    
-                <TouchableOpacity onPress={() => props.navigation.navigate('ScanQRCode')} style={css.buttonP}>
+                <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
+                    <View style={css.container_button}>
+                        <Image style={css.img_button} source={require('../../assets/img/inventariar.png')} />
+                        <Text style={css.text_button_home}>Cadastro</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('ScanQRCode')}>
                     <View style={css.container_button}>
                         <Image style={css.img_button} source={require('../../assets/img/QRCodeIcon.png')} />
-                        <Text style={css.text_button_home}>Inventário</Text>
+                        <Text style={css.text_button_home}>Inventariar</Text>
                     </View>
                 </TouchableOpacity>
             </View>

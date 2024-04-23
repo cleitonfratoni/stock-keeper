@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {HomeAndroid, Login, ScanQRCode} from './views'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AreaRestrita from './views/arearestrita/AreaRestrita';
+import Cadastro from './views/android/Cadastro';
 
 
 export default function App() {
@@ -35,8 +36,21 @@ export default function App() {
           headerShown:false,
           gestureEnabled: false
         }}
+        />        
+        <Stack.Screen 
+        name="Cadastro" 
+        component={Cadastro}
+        options={{
+          headerShown:false
+        }}
+         />
+        <Stack.Screen 
+        name="ScanQRCode" 
+        component={ScanQRCode}
+        options={{
+          headerShown:false
+        }}
         />
-        <Stack.Screen name="ScanQRCode" component={ScanQRCode} />
         <Stack.Screen name="AreaRestrita" component={AreaRestrita} />
       </Stack.Navigator>
     </NavigationContainer>

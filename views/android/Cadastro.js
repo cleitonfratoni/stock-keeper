@@ -5,7 +5,7 @@ import config from '../../config/config.json'
 import Icon from 'react-native-vector-icons/FontAwesome';
 // import { TextInput } from 'react-native-web';
 
-export default function ScanQRCode({navigation}) {
+export default function Cadastro({navigation}) {
 
     // const address=config.origin;
     const [product, setProduct]=useState(null);
