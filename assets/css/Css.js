@@ -34,7 +34,8 @@ const css = StyleSheet.create({
     img_logo_black: {
         height: 290,
         width: 290,
-        marginLeft: 15
+        marginLeft: 15,
+        marginTop: 50
     },
     // Config da logo versão gray
     img_logo_gray: {
@@ -108,11 +109,15 @@ const css = StyleSheet.create({
 
       //Text principal para telas (Identificador de telas)
       identify_label:{
-        textAlign:'center',
+        textAlign:'left',
         color: '#fff',
         fontWeight: 'bold',
-        fontSize: 25,
+        fontSize: 15,
         marginBottom: 15,
+      },
+
+      teste:{
+        flex: 1
       },
   });
 export{css};

@@ -24,9 +24,10 @@ export default function App() {
         // Option serve para configurar Header.
         options={{
           title: '',
-          headerStyle:{backgroundColor: '#000'},
-          headerTintColor: '#333',
+          // headerStyle:{backgroundColor: '#000'},
+          // headerTintColor: '#333',
           headerTitleStyle:{fontSize:0, fontWeight:'bold', alignSelf:'center', color:'#fff'},
+          headerTransparent: true,
         }}
         />
         <Stack.Screen 

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import {Image, Text, View, TouchableOpacity,TouchableWithoutFeedback,SafeAreaView,TextInput} from 'react-native';
+import {Image, Text, View, TouchableOpacity,TouchableWithoutFeedback,SafeAreaView,TextInput,Alert} from 'react-native';
 import { css } from '../../assets/css/Css';
-import config from '../../config/config.json'
+import config from '../../config/config.json';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/FontAwesome';
 // import { TextInput } from 'react-native-web';
 
@@ -64,10 +65,7 @@ export default function ScanQRCode({navigation}) {
             return true;
           };
         backAction()
-    }
-
-
-
+    };
 
 
     return(
@@ -79,16 +77,17 @@ export default function ScanQRCode({navigation}) {
             </View>
             <View>
                 <Image style={[css.img_logo_gray, {height:200, width:200}]} source={require('../../assets/img/logo_gray.jpeg')}/>
-                <Text style={css.identify_label}>CADASTRAR ITEM</Text>
+                <Text style={css.identify_label}>Escaneia o QRCode ai, otário</Text>
             </View>
             <View>
                 <View>
-                    <TextInput style={css.text_input} placeholder='Nome do Produto' onChangeText={text=>setProduct(text)}/>
-                    <TextInput style={css.text_input} placeholder='Tipo do Produto' onChangeText={text=>setType(text)}/>
-                    <TextInput style={css.text_input} placeholder='Descrição do Produto' onChangeText={text=>setDescription(text)}/>
-                    <TextInput style={css.text_input} placeholder='Preço do Produto' onChangeText={text=>setPrice(text)}/>
+                    <TextInput style={css.text_input} placeholder='Código do Produto' onChangeText={text=>setProduct(text)}/>
                 </View>
-                <TouchableOpacity style={[css.container_button, {width:250, marginLeft: 40}]} onPress={()=>sendForm()}>
+                <TouchableOpacity style={[css.container_button, {marginLeft:40, width:250, paddingHorizontal:5}]} onPress={()=>sendForm()}>
+                    <Image style={css.img_button} source={require('../../assets/img/QRCodeIcon.png')} />
+                    <Text style={css.text_button_home}>Usar Leitor</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={[css.container_button, {width:250, marginLeft: 40, marginTop:1}]} onPress={()=>sendForm()}>
                     <Text style={css.text_button}>Cadastrar</Text>
                 </TouchableOpacity>
             </View>            
