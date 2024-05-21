@@ -9,20 +9,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      productName: {
         type: Sequelize.STRING
       },
-      code: {
-        type: Sequelize.STRING,
-        unique: true
-      },
-      product_type: {
+      type: {
         type: Sequelize.STRING
       },
-      description: {
-        type: Sequelize.STRING
-      },
-      price: {
+      weight: {
         type: Sequelize.FLOAT
       },
       createdAt: {
@@ -34,8 +27,6 @@ module.exports = {
         type: Sequelize.DATE
       }
     });
-
-
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Products');

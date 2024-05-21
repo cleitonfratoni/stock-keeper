@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "matheus.gomes",
-    "password": "Qazdehau123@",
+    "username": "root",
+    "password": "root",
     "database": "stock-keeper",
-    "host": "127.0.0.1",
+    "host": "172.17.0.2",
     "dialect": "mysql"
   },
   "test": {
@@ -20,6 +20,6 @@
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
-  "urlRoot": "http://172.20.10.14:3000/",
+  "urlRoot": "http://192.168.1.1:3000/",
   "origin": "Rua João de Lucas, 50 - Monte Mor/SP"
 }

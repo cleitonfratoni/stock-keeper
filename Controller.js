@@ -13,7 +13,8 @@ app.use(bodyParser.urlencoded({extended:false}));
 // // Criando o INSERT do CRUD
 let user=models.User;
 let product=models.Product;
-let stock=models.stock;
+// let stock=models.stock;
+// let position=models.position;
 
 app.post('/login',async(req,res)=>{
     let response=await user.findOne({
@@ -54,17 +55,18 @@ app.post('/create', async(req, res)=>{
 
 
 
-// //   PRA NÃO ESQUECER
-// // Insert do Usuário
-// app.get('/create',async (req,res)=>{
-//     let create=await user.create({
-//         username: "mathgoms", 
-//         password: "Qazdehau123@",
-//         createdAt: new Date(),
-//         updateAt: new Date()    
-//     });
-//     res.send('Usuário criado com sucesso!');
-// });
+//   PRA NÃO ESQUECER
+// Insert do Usuário
+app.get('/create',async (req,res)=>{
+    let create=await user.create({
+        username: "fuboka", 
+        password: "penis",
+        position: "senior",
+        createdAt: new Date(),
+        updateAt: new Date()    
+    });
+    res.send('Usuário criado com sucesso!');
+});
 
 // // Criando o SELECT do CRUD
 // app.get('/read',async(req,res)=>{

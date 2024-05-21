@@ -2,15 +2,14 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Stocks', {
+    await queryInterface.createTable('Histories', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      // Chave estrangeira
-      fk_inputUser: {
+      fk_idUser: {
         type: Sequelize.INTEGER,
         references:{
           model: 'Users',
@@ -19,11 +18,10 @@ module.exports = {
         onUpdate:'cascade',
         onDelete:'cascade'
       },
-      // Chave estrangeira
-      fk_outputUser: {
+      fk_idProduto: {
         type: Sequelize.INTEGER,
         references:{
-          model: 'Users',
+          model: 'Products',
           key: 'id'
         },
         onUpdate:'cascade',
@@ -31,20 +29,6 @@ module.exports = {
       },
       qtd: {
         type: Sequelize.INTEGER
-      },
-      price_total: {
-        type: Sequelize.FLOAT
-      },
-      // Chave estrangeira
-      fk_code: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        references:{
-          model: 'Products',
-          key: 'code'
-        },
-        onUpdate:'cascade',
-        onDelete:'cascade'
       },
       createdAt: {
         allowNull: false,
@@ -57,6 +41,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Stocks');
+    await queryInterface.dropTable('Histories');
   }
 };
