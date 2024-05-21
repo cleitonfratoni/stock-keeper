@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "cleitonr",
-    "password": "Senha@123",
+    "username": "root",
+    "password": "root",
     "database": "stock-keeper",
-    "host": "127.0.0.1",
+    "host": "172.17.0.2",
     "dialect": "mysql"
   },
   "test": {
@@ -19,5 +19,7 @@
     "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mysql"
-  }
+  },
+  "urlRoot": "http://10.45.4.2:4000/",
+  "origin": "Rua Origenes Lessa, 316 - Hortolândia/SP"
 }

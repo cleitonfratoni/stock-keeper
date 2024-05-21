@@ -1,8 +1,32 @@
-import React from 'react';
-import {Image, Text, View, TouchableOpacity,TouchableWithoutFeedback,SafeAreaView} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import {
+    Image,
+    Text,
+    View,
+    TouchableOpacity,
+    TouchableWithoutFeedback,
+    SafeAreaView,
+    Alert
+} from 'react-native';
 import { css } from '../../assets/css/Css';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export default function Home(props) {
+
+    const [user,setUser] = useState(null);
+
+    // Função para dar bem vindo ao user, bem brega
+    useEffect(()=>{
+        async function getUser(){
+            let response=await AsyncStorage.getItem('userData');
+            let json=JSON.parse(response);
+            setUser(json.username);
+            Alert.alert(`Bem Vindo, ${json.username} `, 'Use com sabedoria!');
+        }
+        getUser();
+    },[]);
+
     return(
         <SafeAreaView style={css.container_tela_padrao}>
             <View>

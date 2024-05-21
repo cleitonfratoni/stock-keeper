@@ -1,47 +1,82 @@
 import React, {useState, useEffect} from 'react';
-import { Text, View, StyleSheet, Button, Image, TextInput, TouchableOpacity, Alert } from 'react-native';
+import {
+    KeyboardAvoidingView,
+    Platform,
+    Text,
+    View,
+    Image,
+    TextInput,
+    TouchableOpacity,
+    Alert
+} from 'react-native';
 import { css } from '../../assets/css/Css';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import config from '../../config/config.json'
 
-export default function Login({navigation}){
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+export default function Login({navigation})
+{
+    const [user,setUser]=useState(null)
+    const [password,setPassword]=useState(null)
+    const [login,setLogin]=useState(null)
 
-    const handleLogin = () => {
-        if(username === 'usuario' && password === 'senha'){
-            navigation.navigate('Home', { id: 31 });
+    // Integranção com o banco e dados
+    async function sendForm()
+    {
+        let response = await fetch(config.urlRoot+'login',{
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: user,
+                password: password
+            })
+        })
+        // Validação dos dados do usuário
+        let json=await response.json();
+        if(json === 'error'){
+            Alert.alert('Error', 'Usuário ou senha incorretos!')
+            await AsyncStorage.clear()
         }else{
-            Alert.alert('Error', 'Usuário incorreto!!');
+            await AsyncStorage.setItem('userData', JSON.stringify(json))
+            navigation.navigate('Home')
         }
     }
 
 
     return(
         <SafeAreaView style={css.container_login}>
-            <View>
-                <View style={css.container_textinput}>
-                    <Image style={css.img_logo_black} source={require('../../assets/img/SK_mini.png')}/>
-                    <Text style={css.textPage_login}>Username</Text>
-                    <TextInput
-                        style={css.text_input}
-                        placeholder=""
-                        onChangeText={(text) => setUsername(text)}
-                    />
+            <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+                <View>
+                    <View style={css.container_textinput}>
+                        <Image style={css.img_logo_black} source={require('../../assets/img/icon.png')}/>
+                        <Text style={css.textPage_login}>Username</Text>
+                        <TextInput
+                            style={css.text_input}
+                            placeholder=""
+                            onChangeText={ text => setUser(text) }
+                        />
+                    </View>
+                    <View style={css.container_textinput}>
+                        <Text style={css.textPage_login}>Senha</Text>
+                        <TextInput
+                            style={css.text_input}
+                            secureTextEntry={true}
+                            onChangeText={ text => setPassword(text)}
+                        />
+                    </View>
+                    <View style={css.container_fundo_2}>
+                        <TouchableOpacity style={[css.container_button,
+                            {justifyContent:'center'}]}
+                            onPress={()=>sendForm()}>
+                            <Text style={css.text_button}>Entrar</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-                <View style={css.container_textinput}>
-                    <Text style={css.textPage_login}>Senha</Text>
-                    <TextInput
-                        style={css.text_input}
-                        secureTextEntry={true}
-                        onChangeText={(text) => setPassword(text)}
-                    />
-                </View>
-                <View style={css.container_fundo_2}>
-                    <TouchableOpacity style={[css.container_button, {justifyContent:'center'}]} onPress={handleLogin}>
-                        <Text style={css.text_button}>Entrar</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
+            </KeyboardAvoidingView>
         </SafeAreaView>
     )
 }

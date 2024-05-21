@@ -2,38 +2,20 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Stocks', {
+    await queryInterface.createTable('Products', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      productID: {
-        type: Sequelize.INTEGER,
-        references:{
-          model: 'Products',
-          key:'id'
-        },
-        onUpdate:'cascade',
-        onDelete:'cascade'
-      },
-      code: {
+      productName: {
         type: Sequelize.STRING
       },
-      quantidade: {
-        type: Sequelize.INTEGER
+      type: {
+        type: Sequelize.STRING
       },
-      userId: {
-        type: Sequelize.INTEGER,
-        references:{
-          model: 'Users',
-          key:'id'
-        },
-        onUpdate:'cascade',
-        onDelete:'cascade'
-      },
-      preco_total: {
+      weight: {
         type: Sequelize.FLOAT
       },
       createdAt: {
@@ -47,6 +29,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Stocks');
+    await queryInterface.dropTable('Products');
   }
 };

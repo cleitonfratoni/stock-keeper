@@ -10,12 +10,13 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      User.hasMany(models.Stock);;
+      User.hasMany(models.History);
     }
   }
   User.init({
-    name: DataTypes.STRING,
-    password: DataTypes.STRING
+    username: DataTypes.STRING,
+    password: DataTypes.STRING,
+    position: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'User',

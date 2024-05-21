@@ -3,6 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import { Platform, View, Text } from 'react-native';
 import { HomeAndroid, Login, ScanQRCode } from './views/index';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -29,15 +31,21 @@ function SeparatingScreen() {
                 alignSelf: 'center',
                 color: '#fff',
               },
+              header: 10
             }}
           />
           <Stack.Screen name="Home" 
           component={HomeAndroid}
-          options={{headerShown:false}}
+          options={{
+            headerShown:false,
+            gestureEnabled:false
+          }}
           />
           <Stack.Screen name="ScanQRCode"
           component={ScanQRCode}
-          options={{headerShown:false}}
+          options={{
+            headerShown:false
+          }}
           />
         </Stack.Navigator>
       )}
