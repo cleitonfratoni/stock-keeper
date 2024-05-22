@@ -33,18 +33,18 @@ function SeparatingScreen() {
             }}
           />
           <Stack.Screen 
-            name="ScanQRCode"
-            component={ScanQRCode}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen 
             name="Home" 
             component={HomeAndroid}
             options={{
               headerShown: false,
               gestureEnabled: false
+            }}
+          />
+          <Stack.Screen 
+            name="ScanQRCode"
+            component={ScanQRCode}
+            options={{
+              headerShown: false,
             }}
           />
         </Stack.Navigator>
