@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {
     Image,
     Text,
     View,
     TouchableOpacity,
-    TouchableWithoutFeedback,
     SafeAreaView,
-    Alert
+    Alert,
+    BackHandler
 } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import { css } from '../../assets/css/Css';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -26,6 +27,32 @@ export default function Home(props) {
         }
         getUser();
     },[]);
+
+    // Função do botão voltar no Android
+    useFocusEffect(
+        React.useCallback(() => {
+            const backAction = () => {
+                Alert.alert('Atenção', 'Você tem certeza que gostaria de fazer logoff?', [
+                    {
+                        text: 'CANCELAR',
+                        onPress: () => null,
+                        style: 'cancel',
+                    },
+                    { text: 'SIM', onPress: () => props.navigation.navigate('Login') },
+                ]);
+                return true;
+            };
+
+            const backHandler = BackHandler.addEventListener(
+                'hardwareBackPress',
+                backAction,
+            );
+
+            return () => {
+                backHandler.remove();
+            };
+        }, [])
+    );
 
     return(
         <SafeAreaView style={css.container_tela_padrao}>

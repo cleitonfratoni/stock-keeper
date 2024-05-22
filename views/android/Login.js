@@ -7,8 +7,10 @@ import {
     Image,
     TextInput,
     TouchableOpacity,
-    Alert
+    Alert,
+    BackHandler
 } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import { css } from '../../assets/css/Css';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -44,6 +46,31 @@ export default function Login({navigation})
             navigation.navigate('Home')
         }
     }
+
+    useFocusEffect(
+        React.useCallback(() => {
+            const backAction = () => {
+                Alert.alert('Atenção', 'Você tem certeza que gostaria de sair do app?', [
+                    {
+                        text: 'CANCELAR',
+                        onPress: () => null,
+                        style: 'cancel',
+                    },
+                    { text: 'SIM', onPress: () => BackHandler.exitApp() },
+                ]);
+                return true;
+            };
+
+            const backHandler = BackHandler.addEventListener(
+                'hardwareBackPress',
+                backAction,
+            );
+
+            return () => {
+                backHandler.remove();
+            };
+        }, [])
+    );
 
 
     return(
