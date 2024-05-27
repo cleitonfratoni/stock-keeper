@@ -2,7 +2,15 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import { Platform, View, Text } from 'react-native';
-import { HomeAndroid, Login, ScanQRCode } from './views/index';
+import { 
+  AddProduct,
+  History,
+  HomeAndroid,
+  Login,
+  ManageStock,
+  ScanQRCode,
+  Stock
+} from './views/index';
 
 const Stack = createNativeStackNavigator();
 
@@ -43,6 +51,34 @@ function SeparatingScreen() {
           <Stack.Screen 
             name="ScanQRCode"
             component={ScanQRCode}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen 
+            name="History"
+            component={History}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen 
+            name="Stock"
+            component={Stock}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen 
+            name="AddProduct"
+            component={AddProduct}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen 
+            name="ManageStock"
+            component={ManageStock}
             options={{
               headerShown: false,
             }}

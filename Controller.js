@@ -35,16 +35,16 @@ app.listen(port,(req,res)=>{
 });
 
 // VALE RELEMBRAR
-// app.get('/create',async (req,res)=>{
-//     let create=await user.create({
-//         username: "fuboka",
-//         password: "123",
-//         position: "admin",
-//         createdAt: new Date(),
-//         updatedAt: new Date()
-//     });
-//     res.send('Usuário criado com sucesso!')
-// });
+app.get('/create',async (req,res)=>{
+    let create=await user.create({
+        username: "usuario",
+        password: "321",
+        position: "user",
+        createdAt: new Date(),
+        updatedAt: new Date()
+    });
+    res.send('Usuário criado com sucesso!')
+});
 
 // app.get('/read', async (req,res)=>{
 //     let read=await user.findAll({ raw:true });

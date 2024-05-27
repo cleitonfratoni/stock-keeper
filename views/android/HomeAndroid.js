@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Image,
     Text,
@@ -15,15 +15,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Home(props) {
 
-    const [user,setUser] = useState(null);
+    const [user,setUser] = useState(null);    
 
     // Função para dar bem vindo ao user, bem brega
     useEffect(()=>{
         async function getUser(){
-            let response=await AsyncStorage.getItem('userData');
-            let json=JSON.parse(response);
-            setUser(json.username);
-            Alert.alert(`Bem Vindo, ${json.username} `, 'Use com sabedoria!');
+            let response = await AsyncStorage.getItem('userData');
+            let json = JSON.parse(response);
+            setUser(json);
+            Alert.alert(`Bem Vindo, ${json.username}!`, 'Use com sabedoria!');
         }
         getUser();
     },[]);
@@ -68,14 +68,46 @@ export default function Home(props) {
                         <Text style={css.text_button}>Escanear QR Code</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => props.navigation.navigate('ScanQRCode')}>
+                <TouchableOpacity onPress={() => props.navigation.navigate('History')}>
                     <View style={css.container_button}>
                         <View style={css.container_img_button}>
-                            <Image style={css.img_button} source={require('../../assets/img/relatorio_logo.png')} />
+                            <Image style={css.img_button} source={require('../../assets/img/history-icon.png')} />
                         </View>
-                        <Text style={css.text_button_escanear}>Relatório</Text>
+                        <Text style={css.text_button_escanear}>Histórico</Text>
                     </View>
                 </TouchableOpacity>
+                {user && user.position === 'admin' &&(
+                    <>
+                        <TouchableOpacity onPress={() => props.navigation.navigate('AddProduct')}>
+                            <View style={css.container_button}>
+                                <View style={css.container_img_button}>
+                                    <Image style={css.img_button} source={require('../../assets/img/addProduct-icon.png')} />
+                                </View>
+                                <Text style={css.text_button_escanear}>Adicionar Produto</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => props.navigation.navigate('ManageStock')}>
+                            <View style={css.container_button}>
+                                <View style={css.container_img_button}>
+                                    <Image style={css.img_button} source={require('../../assets/img/stock-icon.png')} />
+                                </View>
+                                <Text style={css.text_button_escanear}>Gerenciar estoque</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </>
+                )}
+                {user && user.position === 'user' &&(
+                    <>
+                        <TouchableOpacity onPress={() => props.navigation.navigate('Stock')}>
+                            <View style={css.container_button}>
+                                <View style={css.container_img_button}>
+                                    <Image style={css.img_button} source={require('../../assets/img/stock-icon.png')} />
+                                </View>
+                                <Text style={css.text_button_escanear}>Estoque</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </>
+                )}
             </View>
             
         </SafeAreaView>

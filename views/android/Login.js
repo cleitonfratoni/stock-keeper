@@ -14,36 +14,26 @@ import { useFocusEffect } from '@react-navigation/native';
 import { css } from '../../assets/css/Css';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import config from '../../config/config.json'
+import { authenticateUser } from '../../src/apiGateway';
 
 export default function Login({navigation})
 {
     const [user,setUser]=useState(null)
     const [password,setPassword]=useState(null)
-    const [login,setLogin]=useState(null)
 
-    // Integranção com o banco e dados
-    async function sendForm()
-    {
-        let response = await fetch(config.urlRoot+'login',{
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: user,
-                password: password
-            })
-        })
-        // Validação dos dados do usuário
-        let json=await response.json();
-        if(json === 'error'){
-            Alert.alert('Error', 'Usuário ou senha incorretos!')
-            await AsyncStorage.clear()
-        }else{
-            await AsyncStorage.setItem('userData', JSON.stringify(json))
-            navigation.navigate('Home')
+    // Integração com o banco de dados API Gateway
+    async function sendForm(){
+        try {
+            let json = await authenticateUser(user,password)
+            if (json === 'error') {
+                Alert.alert('Error', 'Usuário ou senha incorretos')
+                await AsyncStorage.clear();
+            } else {
+                await AsyncStorage.setItem('userData', JSON.stringify(json))
+                navigation.navigate('Home')
+            }
+        } catch (error) {
+            Alert.alert('Error', 'Ocorreu um erro ao tentar fazer login. Por favor, tente novamente.')
         }
     }
 
