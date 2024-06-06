@@ -23,7 +23,7 @@ export default function Home(props) {
             let response = await AsyncStorage.getItem('userData');
             let json = JSON.parse(response);
             setUser(json);
-            Alert.alert(`Bem Vindo, ${json.username}!`, 'Use com sabedoria!');
+            // Alert.alert(`Bem Vindo, ${json.username}!`, 'Use com sabedoria!');
         }
         getUser();
     },[]);
@@ -60,30 +60,22 @@ export default function Home(props) {
                 <Image style={css.img_logo_gray} source={require('../../assets/img/logo_gray.jpeg')}/>
             </View>
             <View>    
-                <TouchableOpacity onPress={() => props.navigation.navigate('ScanQRCode')}>
+                <TouchableOpacity onPress={() => props.navigation.navigate('AddProduct')}>
                     <View style={css.container_button}>
                         <View style={css.container_img_button}>
-                            <Image style={css.img_button} source={require('../../assets/img/QRCodeIcon.png')} />
+                            <Image style={css.img_button} source={require('../../assets/img/add-product-icon.png')} />
                         </View>
-                        <Text style={css.text_button}>Escanear QR Code</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => props.navigation.navigate('History')}>
-                    <View style={css.container_button}>
-                        <View style={css.container_img_button}>
-                            <Image style={css.img_button} source={require('../../assets/img/history-icon.png')} />
-                        </View>
-                        <Text style={css.text_button_escanear}>Histórico</Text>
+                        <Text style={css.text_button}>Adicionar Produto</Text>
                     </View>
                 </TouchableOpacity>
                 {user && user.position === 'admin' &&(
                     <>
-                        <TouchableOpacity onPress={() => props.navigation.navigate('AddProduct')}>
+                        <TouchableOpacity onPress={() => props.navigation.navigate('RegisterProduct')}>
                             <View style={css.container_button}>
                                 <View style={css.container_img_button}>
                                     <Image style={css.img_button} source={require('../../assets/img/addProduct-icon.png')} />
                                 </View>
-                                <Text style={css.text_button_escanear}>Adicionar Produto</Text>
+                                <Text style={css.text_button_escanear}>Cadastrar Produto</Text>
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => props.navigation.navigate('ManageStock')}>
@@ -92,6 +84,14 @@ export default function Home(props) {
                                     <Image style={css.img_button} source={require('../../assets/img/stock-icon.png')} />
                                 </View>
                                 <Text style={css.text_button_escanear}>Gerenciar estoque</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => props.navigation.navigate('RegisterUser')}>
+                            <View style={css.container_button}>
+                                <View style={css.container_img_button}>
+                                    <Image style={css.img_button} source={require('../../assets/img/user-icon.png')} />
+                                </View>
+                                <Text style={css.text_button_escanear}>Cadastrar Usuário</Text>
                             </View>
                         </TouchableOpacity>
                     </>
@@ -103,7 +103,7 @@ export default function Home(props) {
                                 <View style={css.container_img_button}>
                                     <Image style={css.img_button} source={require('../../assets/img/stock-icon.png')} />
                                 </View>
-                                <Text style={css.text_button_escanear}>Estoque</Text>
+                                <Text style={css.text_button_escanear}>Cadastrar  Produto</Text>
                             </View>
                         </TouchableOpacity>
                     </>

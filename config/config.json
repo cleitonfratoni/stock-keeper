@@ -19,7 +19,5 @@
     "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mysql"
-  },
-  "urlRoot": "http://100.66.4.150:4000/",
-  "origin": "Rua Origenes Lessa, 316 - Hortolândia/SP"
+  }
 }

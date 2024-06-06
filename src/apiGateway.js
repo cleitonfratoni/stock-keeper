@@ -27,5 +27,40 @@ const authenticateUser = async (username, password) => {
   }
 };
 
+// Função para adicionar um produto, enviando uma requisição POST para o endpoint '/products'
+const registerProduct = async (product) => {
+  try {
+    const response = await api.post('/products/registerproducts', product);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error registering product:', error);
+    throw error;
+  }
+};
+
+// Função para buscar os nomes dos produtos
+const getProductNames = async () => {
+  try {
+    const response = await api.get('/products/names');
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching product names:', error);
+    throw error;
+  }
+};
+
+// Função para adicionar estoque
+const addToStock = async (stockData) => {
+  try {
+    const response = await api.post('/stock/addtostock', stockData);
+    return response.data;
+  } catch (error) {
+    console.error('Error adding to stock:', error);
+    throw error;
+  }
+};
+
 // Exporta a função para ser usada em outros módulos
-export { authenticateUser };
+export { authenticateUser, registerProduct, getProductNames, addToStock };

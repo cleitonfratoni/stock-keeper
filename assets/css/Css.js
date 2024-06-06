@@ -102,5 +102,40 @@ const css = StyleSheet.create({
         alignItems: 'center',
         padding: 110,
       },
+    //Text principal para telas (Identificador de telas)
+    identify_label:{
+        textAlign:'center',
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 15,
+        marginBottom: 15,
+    },
+    picker: {
+        height: 40,
+        width:325,
+        margin: 3,
+        padding: 10,
+        backgroundColor: 'white',
+        borderRadius: 12,
+    },
+    pickerItem: {
+        marginTop: -17,
+        marginLeft: -17,
+    },
+    radioButtonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginVertical: 10,
+    },
+    radioButtonRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginHorizontal: 10,
+    },
+    radioButtonText: {
+        fontSize: 16,
+        marginLeft: 4,
+        color: '#fff'
+    },
   });
 export{css};

@@ -4,11 +4,11 @@ import React from 'react';
 import { Platform, View, Text } from 'react-native';
 import { 
   AddProduct,
-  History,
   HomeAndroid,
   Login,
   ManageStock,
-  ScanQRCode,
+  RegisterProduct,
+  RegisterUser,
   Stock
 } from './views/index';
 
@@ -23,7 +23,7 @@ function SeparatingScreen() {
         </View>
       ) : (
         <Stack.Navigator>
-          <Stack.Screen
+          {/* <Stack.Screen
             name="Login"
             component={Login}
             options={{
@@ -49,26 +49,12 @@ function SeparatingScreen() {
             }}
           />
           <Stack.Screen 
-            name="ScanQRCode"
-            component={ScanQRCode}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen 
-            name="History"
-            component={History}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen 
             name="Stock"
             component={Stock}
             options={{
               headerShown: false,
             }}
-          />
+          /> */}
           <Stack.Screen 
             name="AddProduct"
             component={AddProduct}
@@ -77,8 +63,22 @@ function SeparatingScreen() {
             }}
           />
           <Stack.Screen 
+            name="RegisterProduct"
+            component={RegisterProduct}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen 
             name="ManageStock"
             component={ManageStock}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen 
+            name="RegisterUser"
+            component={RegisterUser}
             options={{
               headerShown: false,
             }}

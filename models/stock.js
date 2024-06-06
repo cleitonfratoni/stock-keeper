@@ -1,18 +1,26 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Stock extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      Stock.belongsTo(models.Product);  // Pertence a tabela Products (Muitos para Muitos)
+      Stock.belongsTo(models.Product, { foreignKey: 'fk_idProduct' });  // Pertence a tabela Products (Muitos para Muitos)
+    }
+
+    // Método estático para calcular o total do estoque por produto
+    static async getTotalStockByProduct() {
+      const [results, metadata] = await sequelize.query(`
+        SELECT 
+          p.productName,
+          SUM(CASE WHEN s.inOut = true THEN s.qtd ELSE -s.qtd END) AS qtd_total
+        FROM Stocks s
+        JOIN Products p ON s.fk_idProduct = p.id
+        GROUP BY p.productName
+      `);
+      return results;
     }
   }
+
   Stock.init({
     fk_idProduct: DataTypes.INTEGER,
     inOut: DataTypes.BOOLEAN,
@@ -21,5 +29,6 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Stock',
   });
+  
   return Stock;
 };
