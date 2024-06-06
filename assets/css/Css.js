@@ -116,6 +116,24 @@ const css = StyleSheet.create({
         marginBottom: 15,
       },
 
+      // Scanner
+      container: {
+        flex: 1,
+        flexDirection: 'column',
+        backgroundColor: 'black',
+      },
+      preview: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+      },
+      scanText: {
+        backgroundColor: 'white',
+        padding: 15,
+        borderRadius: 10,
+        marginBottom: 20,
+      },
+
       teste:{
         flex: 1
       },

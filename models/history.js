@@ -10,13 +10,13 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      History.belongsTo(models.Product);  // Pertence a tabela Products (Muitos para Muitos)
+      History.belongsTo(models.Stock);  // Pertence a tabela Products (Muitos para Muitos)
       History.belongsTo(models.User);  // Pertence a tabela User (Muitos para Muitos)
     }
   }
   History.init({
     fk_idUser: DataTypes.INTEGER,
-    fk_idProduto: DataTypes.INTEGER,
+    fk_idProduct: DataTypes.INTEGER,
     qtd: DataTypes.INTEGER
   }, {
     sequelize,

@@ -41,11 +41,9 @@ app.post('/create', async(req, res)=>{
     let productId='';
     // Criando produto no banco
     await product.create({
-        name: req.body.product,
-        code: req.body.code,
-        product_type: req.body.type,
-        description: req.body.description,
-        price: req.body.price
+        productName: req.body.productName,
+        type: req.body.type,
+        weight: req.body.weight
     }).then((response)=>{
         productId+=response.id;
     });

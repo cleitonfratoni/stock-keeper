@@ -11,11 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Stock.belongsTo(models.Product);  // Pertence a tabela Products (Muitos para Muitos)
-      Stock.belongsTo(models.User);  // Pertence a tabela User (Muitos para Muitos)
+      Stock.hasMany(models.History);  // Pertence a tabela User (Muitos para Muitos)
     }
   }
   Stock.init({
-    fk_idProduto: DataTypes.INTEGER,
+    fk_idProduct: DataTypes.INTEGER,
     inOut: DataTypes.BOOLEAN,
     qtd: DataTypes.INTEGER
   }, {
