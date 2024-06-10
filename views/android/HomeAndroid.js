@@ -68,6 +68,14 @@ export default function Home(props) {
                         <Text style={css.text_button}>Adicionar Produto</Text>
                     </View>
                 </TouchableOpacity>
+                <TouchableOpacity onPress={() => props.navigation.navigate('Stock')}>
+                    <View style={css.container_button}>
+                        <View style={css.container_img_button}>
+                            <Image style={css.img_button} source={require('../../assets/img/stock-icon.png')} />
+                        </View>
+                        <Text style={css.text_button_escanear}>Visualizar estoque</Text>
+                    </View>
+                </TouchableOpacity>
                 {user && user.position === 'admin' &&(
                     <>
                         <TouchableOpacity onPress={() => props.navigation.navigate('RegisterProduct')}>
@@ -76,14 +84,6 @@ export default function Home(props) {
                                     <Image style={css.img_button} source={require('../../assets/img/addProduct-icon.png')} />
                                 </View>
                                 <Text style={css.text_button_escanear}>Cadastrar Produto</Text>
-                            </View>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => props.navigation.navigate('ManageStock')}>
-                            <View style={css.container_button}>
-                                <View style={css.container_img_button}>
-                                    <Image style={css.img_button} source={require('../../assets/img/stock-icon.png')} />
-                                </View>
-                                <Text style={css.text_button_escanear}>Gerenciar estoque</Text>
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => props.navigation.navigate('RegisterUser')}>
@@ -96,20 +96,7 @@ export default function Home(props) {
                         </TouchableOpacity>
                     </>
                 )}
-                {user && user.position === 'user' &&(
-                    <>
-                        <TouchableOpacity onPress={() => props.navigation.navigate('Stock')}>
-                            <View style={css.container_button}>
-                                <View style={css.container_img_button}>
-                                    <Image style={css.img_button} source={require('../../assets/img/stock-icon.png')} />
-                                </View>
-                                <Text style={css.text_button_escanear}>Cadastrar  Produto</Text>
-                            </View>
-                        </TouchableOpacity>
-                    </>
-                )}
             </View>
-            
         </SafeAreaView>
     );
 }

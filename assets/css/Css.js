@@ -137,5 +137,46 @@ const css = StyleSheet.create({
         marginLeft: 4,
         color: '#fff'
     },
+    safeArea: {
+        flex: 1,
+        backgroundColor: '#2B2B2B',  // Cor de fundo da tela
+    },
+    container: {
+        flex: 1,
+        marginTop: 25,
+        alignItems: 'center',
+        padding: 20,
+    },
+    title: {
+        color: '#fff',  // Cor do texto do título
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 20,
+    },
+    table: {
+        borderWidth: 1,
+        borderColor: '#ddd',
+        borderRadius: 5,
+        overflow: 'hidden',
+        width: '100%', // Ajusta a largura da tabela para 100% do container
+        backgroundColor: '#fff',  // Cor de fundo da tabela
+    },
+    row: {
+        flexDirection: 'row',
+        borderBottomWidth: 1,
+        borderBottomColor: '#ddd',
+    },
+    headerCell: {
+        flex: 1,
+        padding: 10,
+        backgroundColor: '#f7f7f7',
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    cell: {
+        flex: 1,
+        padding: 10,
+        textAlign: 'center',
+    },
   });
 export{css};

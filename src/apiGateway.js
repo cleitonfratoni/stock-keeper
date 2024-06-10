@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Define a URL base do seu backend. Todas as requisições feitas usando a instância `api` usarão essa URL base.
-const API_BASE_URL = 'http://100.66.4.150:4000';
+const API_BASE_URL = 'http://172.19.2.140:4000';
 
 // Cria uma instância do axios com a URL base configurada e um timeout opcional.
 const api = axios.create({
@@ -57,10 +57,19 @@ const addToStock = async (stockData) => {
     const response = await api.post('/stock/addtostock', stockData);
     return response.data;
   } catch (error) {
-    console.error('Error adding to stock:', error);
+    throw error;
+  }
+};
+
+// Função para buscar dados do estoque
+const getStockData = async () => {
+  try {
+    const response = await api.get('/stock');
+    return response.data;
+  } catch (error) {
     throw error;
   }
 };
 
 // Exporta a função para ser usada em outros módulos
-export { authenticateUser, registerProduct, getProductNames, addToStock };
+export { authenticateUser, registerProduct, getProductNames, addToStock, getStockData };

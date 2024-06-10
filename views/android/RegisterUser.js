@@ -26,25 +26,25 @@ export default function RegisterUser(props){
                         style={css.text_input}
                         placeholder='Nome do Produto'
                         onChangeText={text=>setProductName(text)}
-                        value={productName}
+                        // value={productName}
                     />
                     <TextInput
                         style={css.text_input}
                         placeholder='Tipo do Produto'
                         onChangeText={text=>setType(text)}
-                        value={type}
+                        // value={type}
                     />
                     <TextInput
                         style={css.text_input}
                         placeholder='Peso do Produto (KG)'
                         onChangeText={text=>setWeight(text)}
-                        value={weight}
+                        // value={weight}
                         keyboardType='numeric'
                     />
                 </View>
                 <TouchableOpacity
                     style={[css.container_button, {width:250, marginLeft: 40}]}
-                    onPress={sendForm}
+                    // onPress={sendForm}
                 >
                     <Text style={css.text_button}>Cadastrar</Text>
                 </TouchableOpacity>

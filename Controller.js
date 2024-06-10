@@ -44,40 +44,52 @@ app.post('/products/registerproducts', async (req, res) => {
     }
 });
 
+app.get('/stock', async (req, res) => {
+    try {
+        const stockData = await models.Stock.getTotalStockByProduct();
+        res.status(200).json(stockData);
+    } catch (error) {
+        console.error('Error fetching stock data:', error);
+        res.status(500).send('Error fetching stock data');
+    }
+});
+
 app.post('/stock/addtostock', async (req, res) => {
     try {
         const { productName, inOut, qtd } = req.body;
-    
-        // Encontre o produto pelo nome
+
+        // Encontrar o produto pelo nome
         const product = await models.Product.findOne({ where: { productName } });
+
         if (!product) {
-          return res.status(404).send('Produto não encontrado');
+            return res.status(404).send('Produto não encontrado');
         }
-    
-        // Obtenha o id do produto
-        const productId = product.id;
-    
-        // Verifique a quantidade atual do produto no estoque
-        const totalStock = await stock.getTotalStockByProduct();
-        const productStock = totalStock.find(item => item.productName === productName);
-        const currentQuantity = productStock ? productStock.qtd_total : 0;
-    
-        // Se for uma saída (inOut = false), verifique se há quantidade suficiente no estoque
-        if (!inOut && currentQuantity < qtd) {
-          return res.status(400).send('Quantidade insuficiente no estoque');
+
+        // Verificar a quantidade atual no estoque
+        const currentStock = await models.Stock.getTotalStockByProduct();
+
+        // Encontrar a quantidade atual do produto específico
+        const productStock = currentStock.find(item => item.productName === productName);
+
+        const currentQty = productStock ? productStock.qtd_total : 0;
+
+        // Se for uma retirada e a quantidade atual for menor que a quantidade a ser retirada, retornar erro
+        if (inOut === false && currentQty < qtd) {
+            return res.status(400).json({ message: 'Quantidade insuficiente no estoque para retirada', currentQty });
         }
-    
-        // Adicione a entrada/saída ao estoque
-        await stock.create({
-          fk_idProduct: productId,
-          inOut,
-          qtd
+
+        // Adicionar ao estoque
+        await models.Stock.create({
+            fk_idProduct: product.id,
+            inOut,
+            qtd
         });
+
         res.status(201).send('Produto adicionado ao estoque com sucesso');
-      } catch (error) {
+    } catch (error) {
         console.error('Error adding to stock:', error);
-        res.status(500).send('Erro ao adicionar o produto ao estoque');
-      }
+        res.status(500).send('Erro ao adicionar produto ao estoque');
+    }
 });
 
 app.get('/stock/totalstockbyproduct', async (req, res) => {

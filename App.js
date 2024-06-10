@@ -6,7 +6,6 @@ import {
   AddProduct,
   HomeAndroid,
   Login,
-  ManageStock,
   RegisterProduct,
   RegisterUser,
   Stock
@@ -23,7 +22,7 @@ function SeparatingScreen() {
         </View>
       ) : (
         <Stack.Navigator>
-          {/* <Stack.Screen
+          <Stack.Screen
             name="Login"
             component={Login}
             options={{
@@ -54,7 +53,7 @@ function SeparatingScreen() {
             options={{
               headerShown: false,
             }}
-          /> */}
+          />
           <Stack.Screen 
             name="AddProduct"
             component={AddProduct}
@@ -65,13 +64,6 @@ function SeparatingScreen() {
           <Stack.Screen 
             name="RegisterProduct"
             component={RegisterProduct}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen 
-            name="ManageStock"
-            component={ManageStock}
             options={{
               headerShown: false,
             }}

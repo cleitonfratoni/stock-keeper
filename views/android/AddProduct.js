@@ -34,14 +34,10 @@ export default function AddProduct(props){
     }, []);
 
     const sendForm = async () => {
-        if (selectedProductName === '' || quantity === '') {
-            Alert.alert('Erro', 'Por favor, preencha todos os campos.');
-            return;
-        }
         try {
             const stockData = {
                 productName: selectedProductName,
-                inOut: checked,
+                inOut: checked === 'in',
                 qtd: parseFloat(quantity)
             };
             const response = await addToStock(stockData);
@@ -49,9 +45,14 @@ export default function AddProduct(props){
             setSelectedProductName('');
             setQuantity('');
         } catch (error) {
-            Alert.alert('Erro', "Erro ao adicionar o produto ao estoque");
+            if (error.response && error.response.status === 400) {
+                Alert.alert('Erro', `Quantidade insuficiente no estoque para retirada. Quantidade disponível: ${error.response.data.currentQty}`);
+            } else {
+                Alert.alert('Erro', "Erro ao adicionar o produto ao estoque");
+            }
         }
     };
+
     return(
         <SafeAreaView style={css.container_tela_padrao}>
             <View>
