@@ -1,92 +1,121 @@
-import React, {useState, useEffect} from 'react';
-import { Image, Text, View, TouchableOpacity, TouchableWithoutFeedback, SafeAreaView, Alert, BackHandler } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import {
+    Image,
+    Text,
+    View,
+    TouchableOpacity,
+    SafeAreaView,
+    Alert,
+    BackHandler
+} from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import { css } from '../../assets/css/Css';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useFocusEffect } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-export default function HomeAndroid({navigation}) {
+export default function Home({navigation}) {
 
-    const [user, setUser]=useState('');
+    const [user,setUser] = useState(null);    
 
     // Função para dar bem vindo ao user, bem brega
     useEffect(()=>{
         async function getUser(){
-            let response=await AsyncStorage.getItem('userData');
-            let json=JSON.parse(response);
-            setUser(json.username);
-            Alert.alert(`Bem Vindo, ${json.username} `, 'Use com sabedoria!');
+            let response = await AsyncStorage.getItem('userData');
+            let json = JSON.parse(response);
+            setUser(json);
+            // Alert.alert(`Bem Vindo, ${json.username}!`, 'Use com sabedoria!');
         }
         getUser();
     },[]);
 
-    // Função do botão de Logout
-    async function logout(){
-        const backAction = () => {
-            Alert.alert('Calma ae campeão', 'Tem certeza que deseja sair do app?', [
-              {
-                text: "Não",
-                onPress: () => null,
-                style: 'cancel',
-              },
-              {text: "Sim", onPress: async () => {
-                    await AsyncStorage.clear();
-                    navigation.navigate('Login');
-                }},
-            ]);
-            return true;
-          };
-        backAction()
-    }
+    // Função do botão voltar no Android
+    useFocusEffect(
+        React.useCallback(() => {
+            const backAction = () => {
+                Alert.alert('Atenção', 'Você tem certeza que gostaria de fazer logoff?', [
+                    {
+                        text: 'CANCELAR',
+                        onPress: () => null,
+                        style: 'cancel',
+                    },
+                    { text: 'SIM', onPress: () => navigation.navigate('Login') },
+                ]);
+                return true;
+            };
 
-    // Função pro botão de voltar do android não deixar apenas deslogar sem perguntar pro user
-    useEffect(() => {
-        const backAction = () => {
-          Alert.alert('Calma ae campeão', 'Tem certeza que deseja sair do app?', [
-            {
-              text: "Não",
-              onPress: () => null,
-              style: 'cancel',
-            },
-            {text: "Sim", onPress: () => {
-                navigation.navigate('Login');
-                }},
-          ]);
-          return true;
-        };
-    
-        const backHandler = BackHandler.addEventListener(
-          'hardwareBackPress',
-          backAction,
-        );
-    
-        return () => backHandler.remove();
-      }, []);
+            const backHandler = BackHandler.addEventListener(
+                'hardwareBackPress',
+                backAction,
+            );
+
+            return () => {
+                backHandler.remove();
+            };
+        }, [])
+    );
 
     return(
         <SafeAreaView style={css.container_tela_padrao}>
-            <View style={css.HomeAndroid_title}>
-                <TouchableOpacity style={css.buttom_logout} onPress={()=>logout()}>
-                    <Icon name="sign-out" size={30} color="#999"/>
-                </TouchableOpacity>
-            </View>
             <View>
                 <Image style={css.img_logo_gray} source={require('../../assets/img/logo_gray.jpeg')}/>
             </View>
             <View>    
-                <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
+                <TouchableOpacity onPress={() => navigation.navigate('AddProduct')}>
                     <View style={css.container_button}>
-                        <Image style={css.img_button} source={require('../../assets/img/inventariar.png')} />
-                        <Text style={css.text_button_home}>Cadastro</Text>
+                        <View style={css.container_img_button}>
+                            <Image style={css.img_button} source={require('../../assets/img/add-product-icon.png')} />
+                        </View>
+                        <Text style={css.text_button}>Adicionar Produto</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('ScanQRCode')}>
-                    <View style={css.container_button}>
-                        <Image style={css.img_button} source={require('../../assets/img/QRCodeIcon.png')} />
-                        <Text style={css.text_button_home}>Inventariar</Text>
-                    </View>
-                </TouchableOpacity>
+                {user && user.position === 'admin' &&(
+                    <>
+                        <TouchableOpacity onPress={() => navigation.navigate('RegisterProduct')}>
+                            <View style={css.container_button}>
+                                <View style={css.container_img_button}>
+                                    <Image style={css.img_button} source={require('../../assets/img/addProduct-icon.png')} />
+                                </View>
+                                <Text style={css.text_button_escanear}>Cadastrar Produto</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate('ManageStock')}>
+                            <View style={css.container_button}>
+                                <View style={css.container_img_button}>
+                                    <Image style={css.img_button} source={require('../../assets/img/stock-icon.png')} />
+                                </View>
+                                <Text style={css.text_button_escanear}>Gerenciar estoque</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate('DeleteUser')}>
+                            <View style={css.container_button}>
+                                <View style={css.container_img_button}>
+                                    <Image style={css.img_button} source={require('../../assets/img/trash-icon.png')} />
+                                </View>
+                                <Text style={css.text_button_escanear}>Gerenciar Usuários</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate('RegisterUser')}>
+                            <View style={css.container_button}>
+                                <View style={css.container_img_button}>
+                                    <Image style={css.img_button} source={require('../../assets/img/user-icon.png')} />
+                                </View>
+                                <Text style={css.text_button_escanear}>Cadastrar Usuário</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </>
+                )}
+                {user && user.position === 'user' &&(
+                    <>
+                        <TouchableOpacity onPress={() => navigation.navigate('Stock')}>
+                            <View style={css.container_button}>
+                                <View style={css.container_img_button}>
+                                    <Image style={css.img_button} source={require('../../assets/img/stock-icon.png')} />
+                                </View>
+                                <Text style={css.text_button_escanear}>Cadastrar  Produto</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </>
+                )}
             </View>
             
         </SafeAreaView>

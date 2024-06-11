@@ -1,12 +1,19 @@
-import React, {useState, useEffect} from 'react';
-import { Text, View, Button, Alert } from 'react-native';
 import { css } from './assets/css/Css';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {HomeAndroid, Login, ScanQRCode} from './views'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AreaRestrita from './views/arearestrita/AreaRestrita';
-import Cadastro from './views/android/Cadastro';
+import React from 'react';
+import { Platform, View, Text } from 'react-native';
+import { 
+  AddProduct,
+  RegisterProduct,
+  RegisterUser,
+  DeleteUser,
+  forgotPass,
+  Stock
+} from './views/index';
 
 
 export default function App() {
@@ -19,38 +26,70 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen 
-        name="Login" 
-        component={Login} 
-        // Option serve para configurar Header.
-        options={{
-          title: '',
-          // headerStyle:{backgroundColor: '#000'},
-          // headerTintColor: '#333',
-          headerTitleStyle:{fontSize:0, fontWeight:'bold', alignSelf:'center', color:'#fff'},
-          headerTransparent: true,
+          name="Login" 
+          component={Login} 
+          options={{
+            title: '',
+            headerTitleStyle:{fontSize:0, fontWeight:'bold', alignSelf:'center', color:'#fff'},
+            headerTransparent: true,
         }}
         />
         <Stack.Screen 
-        name="HomeAndroid" 
-        component={HomeAndroid}
-        options={{
-          headerShown:false,
-          gestureEnabled: false
+          name="HomeAndroid" 
+          component={HomeAndroid}
+          options={{
+            headerShown:false,
+            gestureEnabled: false
         }}
-        />        
+        />
         <Stack.Screen 
-        name="Cadastro" 
-        component={Cadastro}
-        options={{
-          headerShown:false
-        }}
-         />
+          name="Stock"
+          component={Stock}
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen 
-        name="ScanQRCode" 
-        component={ScanQRCode}
-        options={{
-          headerShown:false
-        }}
+          name="RegisterProduct" 
+          component={RegisterProduct}
+          options={{
+            headerShown:false
+          }}
+        />
+        <Stack.Screen 
+          name="ScanQRCode" 
+          component={ScanQRCode}
+          options={{
+            headerShown:false
+          }}
+        />
+        <Stack.Screen 
+          name="AddProduct"
+          component={AddProduct}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen 
+          name="RegisterUser"
+          component={RegisterUser}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen 
+          name="DeleteUser"
+          component={DeleteUser}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen 
+          name="forgotPass"
+          component={forgotPass}
+          options={{
+            headerShown: false,
+          }}
         />
         <Stack.Screen name="AreaRestrita" component={AreaRestrita} />
       </Stack.Navigator>

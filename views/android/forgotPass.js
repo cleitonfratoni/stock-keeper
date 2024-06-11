@@ -3,7 +3,7 @@ import { Text, View, Image, TextInput, TouchableOpacity, Alert, Platform, Keyboa
 import { css } from '../../assets/css/Css';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import config from '../../config/config.json'
+import { changePasswordByUsername } from '../../src/apiGateway';
 
 export default function Login({navigation}){
     const [username, setUsername] = useState(null);
@@ -11,36 +11,37 @@ export default function Login({navigation}){
     const [login, setLogin] = useState(null);
 
 
-    //Responsavel pelo envio do formulário
-    async function sendForm(){
-        let response=await fetch(config.urlRoot+'login',{
-            method:'POST',
-            headers:{
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: username,
-                password: password
-            })
-        });
+    // Função para enviar o formulário de mudança de senha
+    async function sendForm() {
+        if (!username || !password) {
+            Alert.alert('Erro', 'Por favor, preencha todos os campos.');
+            return;
+        }
         
-        let json=await response.json();
-        if(json==='error'){
-            Alert.alert('Error', 'Usuário incorreto!!');
-            await AsyncStorage.clear();
-        }else{
-            let userData=await AsyncStorage.setItem('userData', JSON.stringify(json));
-            navigation.navigate('HomeAndroid');
-
-            setUsername('');
-            setPassword('');
+        try {
+            const response = await changePasswordByUsername(username, password);
+            
+            if (response === 'Senha alterada com sucesso') {
+                Alert.alert('Sucesso', 'Senha alterada com sucesso');
+            } else {
+                // Se a função `changePasswordByUsername` retornar uma resposta de sucesso
+                // que não seja 'Senha alterada com sucesso', consideraremos que houve
+                // algum problema desconhecido.
+                Alert.alert('Erro', 'Erro ao alterar a senha');
+            }
+        } catch (error) {
+            // Se a função `changePasswordByUsername` lançar um erro, trataremos como
+            // um erro de solicitação.
+            if (error.message === 'Usuário não encontrado') {
+                Alert.alert('Erro', 'Usuário não encontrado. Verifique o nome de usuário fornecido.');
+            } else {
+                // Outros erros são tratados aqui
+                console.error('Error sending change password request:', error);
+                Alert.alert('Erro', 'Erro ao enviar solicitação de mudança de senha');
+            }
         }
     }
 
-    async function forgotPassword() {
-        navigation.navigate('forgotPass');
-    }
     return(
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={css.teste}>
             <View style={css.container_login}>
@@ -56,7 +57,7 @@ export default function Login({navigation}){
                     />
                 </View>
                 <View style={css.container_textinput}>
-                    <Text style={css.textPage_login}>Senha</Text>
+                    <Text style={css.textPage_login}>Nova Senha</Text>
                     <TextInput
                         style={css.text_input}
                         placeholder=""
@@ -65,16 +66,11 @@ export default function Login({navigation}){
                         value={password}
                     />
                 </View>
-                <View>
-                    <TouchableOpacity onPress={forgotPassword}>
-                        <Text style={[css.textPage_login, {marginLeft:40, fontSize:12}, { textDecorationLine: 'underline' }]}>Esqueceu a senha?</Text>
-                    </TouchableOpacity>
-                </View>
                 <View style={css.container_fundo_2}>
                     <TouchableOpacity style={[css.container_button,
                         {justifyContent:'center'}]}
                         onPress={()=>sendForm()}>
-                        <Text style={css.text_button}>Entrar</Text>
+                        <Text style={css.text_button}>Mudar senha</Text>
                     </TouchableOpacity>
                 </View>
             </View>
