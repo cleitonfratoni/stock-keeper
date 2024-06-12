@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { changePasswordByUsername } from '../../src/apiGateway';
 
-export default function Login({navigation}){
+export default function ForgotPass({navigation}){
     const [username, setUsername] = useState(null);
     const [password, setPassword] = useState(null);
     const [login, setLogin] = useState(null);
@@ -36,7 +36,6 @@ export default function Login({navigation}){
                 Alert.alert('Erro', 'Usuário não encontrado. Verifique o nome de usuário fornecido.');
             } else {
                 // Outros erros são tratados aqui
-                console.error('Error sending change password request:', error);
                 Alert.alert('Erro', 'Erro ao enviar solicitação de mudança de senha');
             }
         }
@@ -47,7 +46,6 @@ export default function Login({navigation}){
             <View style={css.container_login}>
                 <View style={css.container_textinput}>
                     <Image style={css.img_logo_black} source={require('../../assets/img/SK_mini.png')}/>
-                    {/* <Text>{user} = {password}</Text> feito para verificar se os dados estão indo */}
                     <Text style={css.textPage_login}>Username</Text>
                     <TextInput
                         style={css.text_input}

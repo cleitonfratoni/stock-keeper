@@ -39,7 +39,7 @@ export default function Login({navigation}){
     }
 
     async function forgotPassword() {
-        navigation.navigate('forgotPass');
+        navigation.navigate('ForgotPass');
     }
     return(
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={css.teste}>

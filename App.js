@@ -11,7 +11,7 @@ import {
   RegisterProduct,
   RegisterUser,
   DeleteUser,
-  forgotPass,
+  ForgotPass,
   Stock
 } from './views/index';
 
@@ -85,8 +85,8 @@ export default function App() {
           }}
         />
         <Stack.Screen 
-          name="forgotPass"
-          component={forgotPass}
+          name="ForgotPass"
+          component={ForgotPass}
           options={{
             headerShown: false,
           }}

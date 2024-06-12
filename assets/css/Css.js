@@ -54,20 +54,20 @@ const css = StyleSheet.create({
         borderRadius: 12,
     },
     // Config do button 'entrar' na tela de login
-    container_button:{
-        backgroundColor: '#fff',
-        borderRadius: 30,
-        paddingVertical: 20,
-        paddingHorizontal: 40,
-        marginVertical: 20,
-        width: 320,
-        height:60,
-    },
+    // container_button:{
+    //     backgroundColor: '#fff',
+    //     borderRadius: 30,
+    //     paddingVertical: 20,
+    //     paddingHorizontal: 40,
+    //     marginVertical: 20,
+    //     width: 320,
+    //     height:60,
+    // },
     // Imagem do botão Inventário na tela HomeAndroid
     img_button: {
-        width: 40,
-        height:40,
-        marginTop: -10,
+        width: 35,
+        height:35,
+        marginTop: -5,
         marginLeft: 25
     },
     // Text do button 'entrar' na tela de login
@@ -188,23 +188,23 @@ const css = StyleSheet.create({
     //     borderRadius: 12,
     // },
     // Config do button 'entrar' na tela de login
-    // container_button:{
-    //     backgroundColor: '#fff',
-    //     borderRadius: 30,
-    //     justifyContent: 'between',
-    //     alignItems: 'center',
-    //     marginHorizontal:20,
-    //     marginVertical: 8,
-    //     marginLeft: 12,
-    //     padding:10,
-    //     marginBottom: 20,
-    //     width:325,
-    //     flexDirection: 'row'
-    // },
-    // container_img_button: {
-    //     marginRight: 70,
-    //     marginLeft: 20
-    // },
+    container_button:{
+        backgroundColor: '#fff',
+        borderRadius: 30,
+        justifyContent: 'between',
+        alignItems: 'center',
+        marginHorizontal:20,
+        marginVertical: 8,
+        marginLeft: 12,
+        padding:10,
+        marginBottom: 20,
+        width:325,
+        flexDirection: 'row'
+    },
+    container_img_button: {
+        marginRight: 70,
+        marginLeft: 20
+    },
     // img_button: {
     //     width: 40,
     //     height: 40,

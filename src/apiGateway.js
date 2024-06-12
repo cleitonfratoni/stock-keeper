@@ -109,7 +109,6 @@ const deleteUser = async (userId, password) => {
         console.log(`Toma sua safada: ${response.data}`);
         return response.data; // Altere isso se a API retornar apenas 'Senha alterada com sucesso'
     } catch (error) {
-        console.error('Error change user password:', error);
         throw error;
         // Se o erro for 404 e o texto da mensagem de erro contiver "not found",
         // retornaremos uma mensagem indicando que o usuário não foi encontrado.

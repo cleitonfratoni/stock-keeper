@@ -197,6 +197,9 @@ app.put('/user/changepassword', async (req, res) => {
         if (!userToUpdate) {
             console.log(`Usuário: ${username} não encontrado`);
             return res.status(404).send('Usuário não encontrado');
+        }else{
+            console.log('Usuário não encontrado')
+            Alert.alert('Error', 'Usuário não encontrado')
         }
 
         // Atualize a senha do usuário no banco de dados
