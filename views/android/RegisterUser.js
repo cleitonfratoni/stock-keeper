@@ -9,10 +9,30 @@ import {
     TextInput
 } from 'react-native';
 import { css } from '../../assets/css/Css';
-import { registerProduct } from '../../src/apiGateway';
+import { RadioButton } from 'react-native-paper';
+import { registerUser } from '../../src/apiGateway';
 
 export default function RegisterUser(props){
+    const [username, setUsername] = useState(null);
+    const [password, setPassword] = useState(null);
+    const [checked, setChecked] = useState('user');
 
+    const sendForm = async () => {
+        try {
+            const userData = {
+                username: username,
+                password: password,
+                position: checked
+            };
+            const response = await registerUser(userData)
+            Alert.alert('Sucesso', 'Usuario cadastrado com sucesso!')
+            // Redirecionar ou limpar os campos após o cadastro
+            setUsername('');
+            setPassword('');
+        } catch (error) {
+            Alert.alert('Erro', "Erro ao cadastrar o Usuario")
+        }
+    }
 
     return(
         <SafeAreaView style={css.container_tela_padrao}>
@@ -24,27 +44,41 @@ export default function RegisterUser(props){
                 <View>
                     <TextInput
                         style={css.text_input}
-                        placeholder='Nome do Produto'
-                        onChangeText={text=>setProductName(text)}
-                        // value={productName}
+                        placeholder='User'
+                        onChangeText={text=>setUsername(text)}
+                        value={username}
                     />
                     <TextInput
                         style={css.text_input}
-                        placeholder='Tipo do Produto'
-                        onChangeText={text=>setType(text)}
-                        // value={type}
+                        placeholder='Password'
+                        onChangeText={text=>setPassword(text)}
+                        secureTextEntry={true}
+                        value={password}
                     />
-                    <TextInput
-                        style={css.text_input}
-                        placeholder='Peso do Produto (KG)'
-                        onChangeText={text=>setWeight(text)}
-                        // value={weight}
-                        keyboardType='numeric'
-                    />
+                    <View style={css.radioButtonContainer}>
+                        <View style={css.radioButtonRow}>
+                            <RadioButton
+                                value="user"
+                                status={ checked === 'user' ? 'checked' : 'unchecked' }
+                                onPress={() => setChecked('user')}
+                                color='#fff'
+                            />
+                            <Text style={css.radioButtonText}>User</Text>
+                        </View>
+                        <View style={css.radioButtonRow}>
+                            <RadioButton
+                                value="admin"
+                                status={ checked === 'admin' ? 'checked' : 'unchecked' }
+                                onPress={() => setChecked('admin')}
+                                color='#fff'
+                            />
+                            <Text style={css.radioButtonText}>Admin</Text>
+                        </View>
+                    </View>
                 </View>
                 <TouchableOpacity
                     style={[css.container_button, {width:250, marginLeft: 40}]}
-                    // onPress={sendForm}
+                    onPress={sendForm}
                 >
                     <Text style={css.text_button}>Cadastrar</Text>
                 </TouchableOpacity>

@@ -12,6 +12,7 @@ let user=models.User;
 let product=models.Product;
 let stock = models.Stock;
 
+// Login do usuário
 app.post('/login', async (req, res)=>{
     let response = await user.findOne({
         where:{
@@ -26,6 +27,7 @@ app.post('/login', async (req, res)=>{
     };
 });
 
+// Registrar produtos
 app.post('/products/registerproducts', async (req, res) => {
     try {
         let productId = '';
@@ -44,6 +46,7 @@ app.post('/products/registerproducts', async (req, res) => {
     }
 });
 
+// Ver stock
 app.get('/stock', async (req, res) => {
     try {
         const stockData = await models.Stock.getTotalStockByProduct();
@@ -54,6 +57,7 @@ app.get('/stock', async (req, res) => {
     }
 });
 
+// Adicionar/Remover produto ao estoque
 app.post('/stock/addtostock', async (req, res) => {
     try {
         const { productName, inOut, qtd } = req.body;
@@ -92,6 +96,7 @@ app.post('/stock/addtostock', async (req, res) => {
     }
 });
 
+// Querry do total de produtos no estoque
 app.get('/stock/totalstockbyproduct', async (req, res) => {
     try {
       const totalStockByProduct = await stock.getTotalStockByProduct();
@@ -102,6 +107,7 @@ app.get('/stock/totalstockbyproduct', async (req, res) => {
     }
 });
 
+// Procurar nome dos produtos dentro da tabela produto
 app.get('/products/names', async (req, res) => {
     try {
         const names = await product.findAll({
@@ -114,7 +120,97 @@ app.get('/products/names', async (req, res) => {
     }
 });
 
+// Buscar nomes de usuários
+app.get('/user/usernames', async (req, res) => {
+    try {
+        const usernames = await user.findAll({
+            attributes: ['id', 'username']
+        });
+        res.status(200).send(usernames);
+    } catch (error) {
+        console.error('Error fetching user names:', error);
+        res.status(500).send('Error fetching user names');
+    }
+});
 
+// Registrar usuários
+app.post('/user/registeruser', async (req, res) => {
+    try {
+        let userId = '';
+        // Criando produto no banco
+        await user.create({
+            username: req.body.username,
+            password: req.body.password,
+            position: req.body.position
+        }).then((response) => {
+            userId += response.id;
+        });
+        res.status(201).send({ id: userId });
+    } catch (error) {
+        console.error('Error registering user:', error);
+        res.status(500).send('Error registering user');
+    }
+});
+
+// deletea usuaer
+app.delete('/user/deleteuser/:id', async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const { password } = req.body; // Receba a senha no corpo da requisição
+
+        console.log(`Attempting to delete user with ID: ${userId}`);
+
+        const userToDelete = await user.findByPk(userId);
+        
+        if (!userToDelete) {
+            console.log(`User with ID: ${userId} not found`);
+            return res.status(404).send('User not found');
+        }
+
+        if (userToDelete.password !== password) {
+            console.log(`Incorrect password for user with ID: ${userId}`);
+            return res.status(403).send('Incorrect password');
+        }
+
+        await user.destroy({
+            where: {
+                id: userId
+            }
+        });
+
+        console.log(`User with ID: ${userId} deleted successfully`);
+        res.status(200).send('User deleted successfully');
+    } catch (error) {
+        console.error('Error deleting user:', error);
+        res.status(500).send('Error deleting user');
+    }
+});
+
+// Alterar a senha do usuário
+app.put('/user/changepassword', async (req, res) => {
+    try {
+        const { username, newPassword } = req.body; // Receba o nome de usuário e a nova senha no corpo da requisição
+
+        console.log(`Tentando alterar a senha do usuário: ${username}`);
+
+        // Encontre o usuário pelo nome de usuário fornecido
+        const userToUpdate = await user.findOne({ where: { username } });
+        
+        if (!userToUpdate) {
+            console.log(`Usuário: ${username} não encontrado`);
+            return res.status(404).send('Usuário não encontrado');
+        }
+
+        // Atualize a senha do usuário no banco de dados
+        await userToUpdate.update({ password: newPassword });
+
+        console.log(`Senha alterada com sucesso para o usuário: ${username}`);
+        res.status(200).send('Senha alterada com sucesso');
+    } catch (error) {
+        console.error('Erro ao alterar a senha:', error);
+        res.status(500).send('Erro ao alterar a senha');
+    }
+});
 
 app.get('/',(req,res)=>{
     res.send('Meu servidor backend já está rodando!');

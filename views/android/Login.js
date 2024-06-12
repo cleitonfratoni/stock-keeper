@@ -62,6 +62,10 @@ export default function Login({navigation})
         }, [])
     );
 
+    async function forgotPassword() {
+        navigation.navigate('ForgotPassword');
+    }
+
 
     return(
         <SafeAreaView style={css.container_login}>
@@ -84,6 +88,11 @@ export default function Login({navigation})
                             secureTextEntry={true}
                             onChangeText={ text => setPassword(text)}
                         />
+                    </View>
+                    <View>
+                        <TouchableOpacity onPress={forgotPassword}>
+                            <Text style={[css.textPage_login, {marginLeft:15, fontSize:12}, { textDecorationLine: 'underline' }]}>Esqueceu a senha?</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={css.container_fundo_2}>
                         <TouchableOpacity style={[css.container_button,

@@ -23,7 +23,7 @@ export default function Home(props) {
             let response = await AsyncStorage.getItem('userData');
             let json = JSON.parse(response);
             setUser(json);
-            // Alert.alert(`Bem Vindo, ${json.username}!`, 'Use com sabedoria!');
+            Alert.alert(`Bem Vindo, ${json.username}!`, 'Use com sabedoria!');
         }
         getUser();
     },[]);
@@ -92,6 +92,14 @@ export default function Home(props) {
                                     <Image style={css.img_button} source={require('../../assets/img/user-icon.png')} />
                                 </View>
                                 <Text style={css.text_button_escanear}>Cadastrar Usuário</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => props.navigation.navigate('DeleteUser')}>
+                            <View style={css.container_button}>
+                                <View style={css.container_img_button}>
+                                    <Image style={css.img_button} source={require('../../assets/img/trash-icon.png')} />
+                                </View>
+                                <Text style={css.text_button_escanear}>Gerenciar Usuários</Text>
                             </View>
                         </TouchableOpacity>
                     </>

@@ -4,6 +4,8 @@ import React from 'react';
 import { Platform, View, Text } from 'react-native';
 import { 
   AddProduct,
+  DeleteUser,
+  ForgotPassword,
   HomeAndroid,
   Login,
   RegisterProduct,
@@ -40,6 +42,13 @@ function SeparatingScreen() {
             }}
           />
           <Stack.Screen 
+            name="ForgotPassword"
+            component={ForgotPassword}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen 
             name="Home" 
             component={HomeAndroid}
             options={{
@@ -71,6 +80,13 @@ function SeparatingScreen() {
           <Stack.Screen 
             name="RegisterUser"
             component={RegisterUser}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen 
+            name="DeleteUser"
+            component={DeleteUser}
             options={{
               headerShown: false,
             }}

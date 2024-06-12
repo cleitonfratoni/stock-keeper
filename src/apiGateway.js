@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Define a URL base do seu backend. Todas as requisições feitas usando a instância `api` usarão essa URL base.
-const API_BASE_URL = 'http://172.19.2.140:4000';
+const API_BASE_URL = 'http://172.20.10.9:4000';
 
 // Cria uma instância do axios com a URL base configurada e um timeout opcional.
 const api = axios.create({
@@ -39,6 +39,18 @@ const registerProduct = async (product) => {
   }
 };
 
+// Função para adicionar um usuário, enviando uma requisição POST para o endpoint '/user'
+const registerUser = async (user) => {
+  try {
+    const response = await api.post('/user/registeruser', user);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error registering user:', error);
+    throw error;
+  }
+};
+
 // Função para buscar os nomes dos produtos
 const getProductNames = async () => {
   try {
@@ -50,6 +62,55 @@ const getProductNames = async () => {
     throw error;
   }
 };
+
+// Função para buscar os nomes dos usuários
+const getUsernames = async () => {
+  try {
+    const response = await api.get('/user/usernames');
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching user names:', error);
+    throw error;
+  }
+};
+
+// Função para deletar um usuário
+const deleteUser = async (userId, password) => {
+  try {
+    const response = await api.delete(`/user/deleteuser/${userId}`, {
+      data: { password }
+    });
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    throw error;
+  }
+};
+
+// Função para mudar a senha do usuário
+const changePasswordByUsername = async (username, newPassword) => {
+  try {
+      const response = await api.put('/user/changepassword', {
+          username,
+          newPassword
+      });
+      console.log(`Toma sua safada: ${response.data}`);
+      return response.data; // Altere isso se a API retornar apenas 'Senha alterada com sucesso'
+  } catch (error) {
+      throw error;
+      // Se o erro for 404 e o texto da mensagem de erro contiver "not found",
+      // retornaremos uma mensagem indicando que o usuário não foi encontrado.
+      // if (error.response && error.response.status === 404 && error.response.data.includes('not found')) {
+      //     return 'Usuário não encontrado';
+      // } else {
+      //     // Se o erro não for relacionado a usuário não encontrado, lançamos o erro novamente
+      //     console.error('Error changing password:', error);
+      //     throw error;
+      // }
+  };
+}
 
 // Função para adicionar estoque
 const addToStock = async (stockData) => {
@@ -72,4 +133,14 @@ const getStockData = async () => {
 };
 
 // Exporta a função para ser usada em outros módulos
-export { authenticateUser, registerProduct, getProductNames, addToStock, getStockData };
+export { 
+  authenticateUser,
+  registerProduct,
+  getProductNames,
+  addToStock,
+  getStockData,
+  registerUser,
+  getUsernames,
+  deleteUser,
+  changePasswordByUsername
+ };
