@@ -1,3 +1,31 @@
+# version: '3'
+# services:
+#   backend:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     ports:
+#       - "3000:3000"
+#     volumes:
+#       - .:/app
+#     environment:
+#       NODE_ENV: development
+
+#   frontend:
+#     build:
+#       context: ./views/android
+#       dockerfile: Dockerfile
+#     ports:
+#       - "19000:19000"
+#     volumes:
+#       - ./views/android:/app
+#     environment:
+#       NODE_ENV: development
+#     healthcheck:
+#       disable: true
+
+##########################################################################
+
 version: '3'
 services:
   backend:
@@ -17,7 +45,33 @@ services:
       dockerfile: Dockerfile
     ports:
       - "19000:19000"
+      - "19001:19001"
+      - "19002:19002"
+      - "8081:8081"
     volumes:
-      - ./views/android:/app
+      - ./views/android:/opt/my-app
+      - /app/node_modules
+    command: ["npx", "expo", "start"]
     environment:
       NODE_ENV: development
+      # EXPO_CLI_NON_INTERACTIVE: "true"
+      # REACT_NATIVE_PACKAGER_HOSTNAME: "100.66.4.158"
+    healthcheck:
+      disable: true
+
+
+
+
+
+
+# version: '3'
+# services:
+#   frontend:
+#     build:
+#       context: .
+#     volumes:
+#       - ./frontend:/app
+#       - /app/node_modules
+#     ports:
+#       - "8081:8081"
+#     command: ["npx", "expo", "start"]
