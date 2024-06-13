@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Define a URL base do seu backend. Todas as requisições feitas usando a instância `api` usarão essa URL base.
-const API_BASE_URL = 'http://172.20.10.9:4000';
+const API_BASE_URL = 'http://172.20.10.14:4000';
 
 // Cria uma instância do axios com a URL base configurada e um timeout opcional.
 const api = axios.create({
